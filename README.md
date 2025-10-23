@@ -116,8 +116,7 @@ pip install bottle opencv-python ultralytics paddlepaddle paddleocr requests con
 由于Github平台限制上传文件大小，故本仓库不提供演示视频，演示视频请前往Bilibili平台搜索下载（演示视频请搜索关键词：基于SLAM的停车场智能寻车机器人）。
 
 <p align="center" style="font-size:12px;font-weight:bold">
-            Designed By
-    <img src="https://github.com/sonaradarcn/Sonaradar_Copyright_Assets/blob/main/SEL%20LOGO%20FULL.png?raw=true" alt="描述" style="height:64px;align-content:center;margin-left:10px;">
+    <img src="https://github.com/sonaradarcn/Sonaradar_Copyright_Assets/blob/main/SEL%20LOGO%20FULL.png?raw=true" alt="描述" style="height:48px;align-content:center;margin-left:10px;">
 </p>
 
 
