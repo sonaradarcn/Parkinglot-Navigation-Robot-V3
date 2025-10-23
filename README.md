@@ -117,8 +117,7 @@ pip install bottle opencv-python ultralytics paddlepaddle paddleocr requests con
 
 
 <p align="center" style="font-size:12px;font-weight:bold">
-            Designed By
-    <img src="https://github.com/sonaradarcn/Sonaradar_Copyright_Assets/blob/main/SEL%20LOGO%20FULL.png?raw=true" alt="描述" style="height:32px;align-content:center;margin-left:10px;">
+    <img src="https://github.com/sonaradarcn/Sonaradar_Copyright_Assets/blob/main/SEL%20LOGO%20github%20copyright.png?raw=true" alt="描述" style="height:32px;align-content:center;margin-left:10px;">
 </p>
 
 
