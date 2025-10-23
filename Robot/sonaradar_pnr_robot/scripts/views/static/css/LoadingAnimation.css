@@ -1,0 +1,25 @@
+
+
+/* 圆环的容器样式 */
+.circle-container {
+    width: 100px;
+    height: 100px;
+    border: 10px solid transparent; /* 设置圆环的透明边框 */
+    border-radius: 50%;
+    border-top: 10px solid #00b5e2; /* 圆环的上半部分为蓝色 */
+    border-bottom: 10px solid #cccccc; /* 圆环的下半部分为灰色 */
+    border-left: 10px solid #cccccc; /* 圆环的左半部分为灰色 */
+    border-right: 10px solid #cccccc; /* 圆环的右半部分为灰色 */
+    animation: rotateCircle 2s ease-in infinite; /* 应用加速旋转动画 */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* 为圆环添加阴影 */
+}
+
+/* 旋转动画 */
+@keyframes rotateCircle {
+    0% {
+        transform: rotate(0deg); /* 起始角度 */
+    }
+    100% {
+        transform: rotate(360deg); /* 完成一圈 */
+    }
+}

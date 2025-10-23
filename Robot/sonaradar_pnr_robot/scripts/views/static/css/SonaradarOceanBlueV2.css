@@ -1,0 +1,149 @@
+/* 禁止页面的横滚和竖滚动 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* 禁止滚动 */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  height: 100vh;
+  background-image: url('../images/background.png'); /* 设置整体背景 */
+  background-size: cover;
+  background-position: center;
+}
+
+.left-side {
+  width: 70%;
+  background-size: cover;
+  background-position: center;
+}
+
+.right-side {
+  width: 30%;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  animation: slideIn 1s ease-out; /* 右侧渐变动画 */
+  box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.3); /* 添加右侧阴影 */
+}
+
+/* 右侧表单动画 */
+@keyframes slideIn {
+  0% {
+      opacity: 0;
+      transform: translateX(100%);
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+.form-container {
+  width: 300px;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 输入框样式 */
+.form-input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc; /* 灰色边框 */
+  background-color: transparent;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 增强的阴影效果 */
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 聚焦时阴影加深 */
+  border-bottom: 2px solid #00b5e2; /* 天蓝色横线 */
+}
+
+/* 按钮样式 */
+.form-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #00b5e2, #60aee6); /* 更柔和的天蓝色渐变 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease, transform 0.3s ease; /* 按钮背景渐变和动画效果 */
+}
+
+.form-button:hover {
+  background: linear-gradient(to right, #00a0d4, #58a1cf); /* 悬停时的渐变效果 */
+  transform: scale(1.1); /* 鼠标悬停时按钮向四周放大 */
+}
+
+.form-button:active {
+  transform: scale(1); /* 按钮点击时恢复原状 */
+}
+
+/* 复选框样式 */
+.form-checkbox {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.form-checkbox input {
+  position: absolute;
+  opacity: 0;
+}
+
+.form-checkbox .checkmark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.form-checkbox input:checked + .checkmark {
+  background-color: #00b5e2; /* 选中时天蓝色背景 */
+  border-color: #00b5e2;
+}
+
+.form-checkbox input:checked + .checkmark::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: white; /* 选中时显示白色圆点 */
+}
+
+.form-container .footer {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.form-container label {
+  display: inline-block;
+  margin-top: 10px;
+}
