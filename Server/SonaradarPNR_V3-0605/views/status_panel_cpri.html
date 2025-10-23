@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="1">
+    <title>Status Panel - CPRI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 80%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .image-box {
+            width: 50%;
+        }
+
+        .image-box img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-box {
+            width: 40%;
+            padding: 10px;
+        }
+
+        .info-box h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .info-box p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 图片展示框 -->
+        <div class="image-box">
+            <img src="data:image/png;base64,{{image_base64}}" alt="展示的图片" id="image-display">
+        </div>
+
+        <!-- 显示的其他信息 -->
+        <div class="info-box">
+            <h2>Status Panel</h2>
+			<h3>CPRI Recognising Result</h3>
+            <p>CPRI ID:{{data.id}}</p>
+			<p>CPRI Name:{{data.name}}</p>
+			<p>CPRD ID:{{data.cprd_id}}</p>
+            % if data.occupying_flag == True:
+			<p>Occupying Flag:<span style='color:#e00101;font-weight: 600;'>Occupied</span></p>
+            <p>Car Plate:{{data.car_plate_no}}</p>
+            % else:
+            <p>Occupying Flag:<span style='color:#1db808;font-weight: 600;'>Vacant</span></p>
+            % end
+
+        </div>
+    </div>
+</body>
+</html>

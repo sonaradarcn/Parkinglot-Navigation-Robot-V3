@@ -1,0 +1,128 @@
+/* 全局样式 */
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* 按钮样式 */
+.button {
+  background-color: #1E90FF;
+  color: #FFF;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.button:hover {
+  color: #fff;
+  background-color: #00BFFF;
+}
+.button-transparent {
+	background-color: transparent;
+	color: white;
+	border-color: white;
+	border-radius: 5px;
+	border: 3px solid #ccc;
+	transition: all 0.3s ease-in-out;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.button-transparent:hover {
+	background-color: #888;
+	color: white;
+	border-color: #888;
+}
+.input {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 0px 10px 0px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 2px #1E90FF;
+}
+.input:focus {
+  box-shadow: 0 0 10px 2px #1E90FF;
+  outline: none;
+}
+
+/* 动画效果 */
+@keyframes slide-in-left {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.slide-in-left {
+  animation: slide-in-left 2.0s ease;
+}
+
+/* 动画效果 */
+@keyframes slide-in-left2 {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.slide-in-left2 {
+    animation: slide-in-left2 2.0s ease;
+}
+
+.container {
+    padding: 16px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.1);
+    animation: slide-in-left 1.0s;
+	padding: 16px 16px 16px 16px;
+}
+.keyboard {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+		}
+.key {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 50px;
+			height: 50px;
+			margin: 5px;
+			font-size: 20px;
+			font-weight: bold;
+			color: #333;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+}
+		
+.key:hover {
+			background-color: #1E90FF;
+			color: #fff;
+			box-shadow: 0px 0px 5px #1E90FF;
+}
+.loader {
+  border: 8px solid #f3f3f3; 
+  border-top: 8px solid #3498db; 
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

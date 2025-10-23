@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonaradar-PNR V3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e6f2ff;
+            color: #333;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .chat-container {
+            width: 100%;
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-bottom: 50px;
+            margin-top: 30px;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+            overflow: hidden;
+            padding: 20px;
+            opacity: 0;
+            animation: slideUp 0.8s forwards ease-out;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 10px;
+            margin: 10px 0;
+            max-width: 80%;
+            line-height: 1.5;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .user-message {
+            background-color: #b3d7ff;
+            align-self: flex-start;
+        }
+
+        .assistant-message {
+            background-color: #d6e8ff;
+            align-self: flex-end;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        input[type="text"] {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            background-color: #f9f9f9;
+            border-bottom: 2px solid #007bff;
+            transition: border-bottom 0.3s ease;
+            width: 100%;
+            border-radius: 3px;
+        }
+
+        input[type="text"]:focus {
+            border-bottom: 2px solid #0056b3;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 10px; /* Add space between buttons */
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            flex: 1;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .mic-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 12px 20px;
+            width: 48%;
+        }
+
+        .mic-btn:disabled {
+            background-color: #ccc;
+        }
+
+        .mic-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .mode-switch {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            color: #333;
+            cursor: pointer;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="header">
+        对话寻车
+    </div>
+
+    <!-- 消息展示区域 -->
+    <div class="messages" id="messages"></div>
+
+    <!-- 输入区域 -->
+    <div class="input-container" style="width: 100%">
+        <input style="width: 100%" type="text" id="text-input" placeholder="请输入消息..." oninput="toggleSendButton()" />
+
+        <!-- Button container for both buttons -->
+        <div class="button-container" style="width: 100%">
+            <button id="mic-btn" class="mic-btn" onclick="startRecording()">🎤 语音输入</button>
+            <button id="send-btn" onclick="sendMessage()" disabled>发送</button>
+        </div>
+    </div>
+</div>
+
+<form style="position: fixed;bottom: 10px;width: 100%;animation: slide-in-left2 1.0s;min-width: 500px;">
+    <div style="padding-top: 40px;animation: slide-in-left 2.0s;">
+        <div style="align-items: center;justify-content: center;display: flex;padding-top: 10px">
+            <div style="text-align: center;font-size: 8px;color: white;text-shadow: 2px 2px 4px #000000;font-weight: bold;">© 2014-2025 Sonaradar Electronic Inc.All Rights Reserved.</div>
+        </div>
+    </div>
+</form>
+
+<script>
+    let isSpeechMode = false; // 控制当前输入模式
+    let mediaRecorder = null; // 录音对象
+    let audioChunks = []; // 存储音频数据
+    let isRecording = false; // 是否正在录音
+
+    // 获取 DOM 元素
+    const messagesContainer = document.getElementById('messages');
+    const textInput = document.getElementById('text-input');
+    const sendBtn = document.getElementById('send-btn');
+    const micBtn = document.getElementById('mic-btn');
+
+    // 控制发送按钮启用状态
+    function toggleSendButton() {
+        sendBtn.disabled = textInput.value.trim() === '';
+    }
+
+    // 发送消息
+    function sendMessage() {
+        const message = textInput.value.trim();
+        if (message) {
+            displayMessage(message, 'user');
+            textInput.value = '';
+            toggleSendButton();
+            // 在这里将消息发送给后端进行处理
+            getModelResponse(message,'{{machine_id}}',{{point_id}});
+        }
+    }
+
+    // 显示消息
+    function displayMessage(message, role) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+        messageDiv.classList.add(role === 'user' ? 'user-message' : 'assistant-message');
+        messageDiv.innerText = message;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight; // 滚动到底部
+    }
+
+        // 启动语音录制
+    async function startRecording() {
+        if (isRecording) {
+            stopRecording();
+        } else {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = async () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    displayMessage('正在思考', 'assistant');
+
+                    // 将录音文件发送给后端
+                    const formData = new FormData();
+                    formData.append('audio', audioBlob, 'audio.wav');
+                    await sendAudioToBackend(formData,'{{machine_id}}',{{point_id}});
+                };
+
+                mediaRecorder.start();
+                isRecording = true;
+                micBtn.innerText = '🔴 停止录音';
+            } catch (err) {
+                alert('无法获取麦克风权限',err);
+            }
+        }
+    }
+
+    // 停止录音并上传
+    function stopRecording() {
+        mediaRecorder.stop();
+        isRecording = false;
+        micBtn.innerText = '🎤 语音输入';
+    }
+
+async function sendAudioToBackend(formData, machine_id, point_id) {
+    try {
+        // 添加 machine_id 到 formData 中
+        formData.append('machine_id', machine_id);
+        formData.append('point_id', point_id);
+
+        const response = await fetch('../api/upload_audio', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const modelResponse = data.modelResponse; // 假设后端返回模型的响应
+            displayMessage(modelResponse, 'assistant');
+            playTTS(modelResponse);
+        } else {
+            alert('上传音频失败');
+        }
+    } catch (error) {
+        console.error('Error uploading audio:', error);
+        alert('上传音频时出错');
+    }
+}
+
+
+async function getModelResponse(message, machine_id, point_id) {
+    try {
+        displayMessage('正在思考', 'assistant');
+        const response = await fetch('../api/chat_text', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: message,
+                machine_id: machine_id, // 将 machine_id 添加到请求体中
+                point_id: point_id
+            })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const modelResponse = data.modelResponse;
+            displayMessage(modelResponse, 'assistant');
+            // 请求音频播放
+            playTTS(modelResponse);
+        } else {
+            alert('获取模型回答失败');
+        }
+    } catch (error) {
+        console.error('Error fetching model response:', error);
+        alert('获取模型回答时出错');
+    }
+}
+
+    // 播放TTS语音
+    function playTTS(text) {
+        // 触发音频播放权限请求
+        const audio = new Audio(`../api/tts?text=${encodeURIComponent(text)}`);
+
+        // 检查浏览器是否有播放权限
+        audio.play().catch((error) => {
+            console.error("Audio play failed:", error);
+            alert("无法播放语音，请确保浏览器允许自动播放声音");
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Panel - Robot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 80%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .image-box {
+            width: 50%;
+        }
+
+        .image-box img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-box {
+            width: 40%;
+            padding: 10px;
+        }
+
+        .info-box h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .info-box p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 图片展示框 -->
+        <div class="image-box">
+            <h2>Status Panel</h2>
+			<h3>Robot Information</h3>
+            <p>Robot ID:{{data.id}}</p>
+			<p>Machine ID:{{data.machine_id}}</p>
+			<p>Name:{{data.name}}</p>
+
+            % if data.mode == 1:
+                <p>Mode:On Service</p>
+            % elif data.mode == 2:
+                <p>Mode:Debug</p>
+            % elif data.mode == 0:
+                <p>Mode:Off Service</p>
+            % end
+
+            % if flag1 == True:
+			<p>Online Flag:<span style='color:#1db808;font-weight: 600;'>True</span></p>
+
+
+            % if flag3['is_searching_driver'] == True:
+			<p>Searching Driver Flag:<span style='color:#1db808;font-weight: 600;'>True</span></p>
+            % else:
+            <p>Searching Driver Flag:<span style='color:#e00101;font-weight: 600;'>False</span></p>
+            % end
+
+            % if flag3['is_searching_car'] == True:
+			<p>Searching Car Flag:<span style='color:#1db808;font-weight: 600;'>True</span></p>
+            % else:
+            <p>Searching Car Flag:<span style='color:#e00101;font-weight: 600;'>False</span></p>
+            % end
+
+            % if flag3['is_searching_scan_wait'] == True:
+			<p>QR Scaning Waiting Flag:<span style='color:#1db808;font-weight: 600;'>True</span></p>
+            % else:
+            <p>QR Scaning Waiting Flag:<span style='color:#e00101;font-weight: 600;'>False</span></p>
+            % end
+
+			<p>Position:({{point.x}},{{point.y}})</p>
+
+
+
+            % else:
+            <p>Online Flag:<span style='color:#e00101;font-weight: 600;'>False</span></p>
+            % end
+        </div>
+    </div>
+</body>
+</html>

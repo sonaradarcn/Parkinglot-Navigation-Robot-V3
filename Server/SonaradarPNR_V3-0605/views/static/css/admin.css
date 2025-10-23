@@ -1,0 +1,228 @@
+@charset "UTF-8";
+
+html {
+    overflow-x: hidden;
+}
+
+html, body {
+    background-color: #f6f6f6;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.btn{
+    outline: none;
+}
+
+.trans-all-2 {
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.trans-all-15 {
+    -webkit-transition: all 0.15s;
+    -moz-transition: all 0.15s;
+    -ms-transition: all 0.15s;
+    -o-transition: all 0.15s;
+    transition: all 0.15s;
+}
+
+.trans-all-3 {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.big-wrap {
+    width: 100%;
+    min-height: 100vh;
+}
+
+#drawer {
+    min-width: 220px; /*drawer宽度*/
+    width: 220px; /*drawer宽度*/
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #202C39; /*drawer bg color*/
+}
+
+.drawer-closed {
+    margin-left: -220px; /*drawer宽度*/
+}
+
+.drawer-head {
+    height: 50px; /*header高度*/
+    background-color: #283845; /*drawer-head bg color*/
+    color: rgba(255, 255, 255, 0.87);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 18px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.drawer-head .logo {
+    margin-right: 12px;
+    width: 22px;
+    height: 22px;
+}
+.drawer-head .logo-text{
+    color: inherit;
+    text-decoration: none;
+}
+
+#drawer .menu-parent {
+    display: none;
+    list-style: none;
+    padding-left: 0;
+    transition: background-color 0.2s;
+}
+
+#drawer .menu-root {
+    display: block;
+
+}
+
+#drawer .menu-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.56);
+    padding: 12px 12px;
+    transition: color 0.15s, background-color 0.15s;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+
+#drawer .menu-child .menu-child .menu-link {
+    padding-left: 46px;
+    padding-right: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#drawer .menu-child.current .menu-link { /*current*/
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-left: 4px solid #3587A4;
+    color: rgba(255, 255, 255, 0.87);
+}
+
+#drawer .menu-child.current .menu-link:first-child { /*current*/
+}
+
+#drawer .menu-child.open > .menu-link { /*open*/
+    color: rgba(255, 255, 255, 0.87);;
+}
+
+#drawer .menu-child .menu-child .menu-link:hover { /*inner hover*/
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+#drawer .menu-link:hover { /*outer hover*/
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: rgba(255, 255, 255, 0.87);
+    cursor: pointer;
+}
+
+
+#drawer .menu-icon {
+    font-size: 18px;
+    margin-right: 12px;
+    padding-left: 2px;
+    height: 22px;
+    width: 22px;
+}
+
+#drawer .menu-desc {
+    flex-grow: 1;
+}
+
+#drawer .menu-more {
+    width: 22px;
+    height: 22px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+#drawer .menu-child.open > .menu-link > .menu-more {
+    transform: rotateZ(90deg);
+}
+
+
+.content-wrap {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    transition: all 0.2s;
+    padding-left: 220px;
+    position: relative;
+}
+
+.content-wrap-full {
+    padding-left: 0px;
+}
+
+#header {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: 50px; /*header高度*/
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); /*header box-shadow*/
+    padding: 0 8px;
+    max-width: 100%;
+}
+
+#drawer-toggle {
+    outline: none;
+    border: none;
+    background: none !important;
+    box-shadow: none !important;
+}
+
+#drawer-toggle i {
+    color: #283845;
+}
+.login-panel .dropdown-menu{
+    border-radius: 2px;
+    border: none;
+    box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.login-panel .dropdown-menu li a{
+    padding: 8px 16px;
+}
+
+.main-content {
+    width: 100%;
+    flex: 1;
+}
+
+#footer {
+    flex-shrink: 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background-color: white;
+    padding: 12px;
+    justify-content: space-between;
+}
